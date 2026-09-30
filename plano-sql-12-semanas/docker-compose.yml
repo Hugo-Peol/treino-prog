@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:17
+    container_name: treino-sql
+    environment:
+      POSTGRES_USER: treino
+      POSTGRES_PASSWORD: treino
+      POSTGRES_DB: treino
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./dados:/dados
+      - ./dados/00-criar-bancos.sql:/docker-entrypoint-initdb.d/00-criar-bancos.sql
+      - treino-sql-dados:/var/lib/postgresql/data
+
+volumes:
+  treino-sql-dados:
